@@ -1,10 +1,9 @@
 from flask import Flask, request
 import json
 import csv
-from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app, support_credentials=True)
+
 
 @app.route('/sensor_data', methods=['GET', 'POST'])
 def sensor_data():
@@ -22,7 +21,9 @@ def sensor_data():
                          })
     with open("sensor_data.json", "w") as f:
         json.dump(data, f)
-        return("CSV to JSON done")
+    f = open("sensor_data.json", "r")
+    file_contents = f.read()
+    return(file_contents)
 
 
 @app.route('/total_traffic', methods=['GET', 'POST'])
@@ -38,7 +39,9 @@ def total_traffic():
                          })
     with open("total_traffic.json", "w") as f:
         json.dump(data, f)
-        return("CSV to JSON done")
+    f = open("total_traffic.json", "r")
+    file_contents = f.read()
+    return(file_contents)
 
 
 if __name__ == '__main__':
