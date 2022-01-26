@@ -54,7 +54,7 @@ def sensor_data():
     f1 = open("sensor_data.json", "r")
     file1_contents = f1.read()
 
-    return 'Node 1:{} \n Node 2:{}'.format(file_contents, file1_contents)
+    return 'Node 1:{} , Node 2:{}'.format(file_contents, file1_contents)
 
 
 @app.route('/total_traffic', methods=['GET', 'POST'])
