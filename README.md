@@ -1,3 +1,8 @@
+# To-DO
+
+- [ ] Python API should call the node API and not the other way around
+- [ ] The Python API should send only the lastest row of the CSV file and not the whole JSON
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
