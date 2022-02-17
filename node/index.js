@@ -5,7 +5,7 @@ const app = express();
 
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri =
-  "mongodb+srv://admin:admin@cluster0.wehxb.mongodb.net/Cluster0?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin@cluster0.wehxb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
