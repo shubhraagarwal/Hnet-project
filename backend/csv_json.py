@@ -2,16 +2,18 @@ from flask import Flask, request
 import json
 import csv
 import pandas as pd
-# from flask_cors import CORS, cross_origin
-
+from flask_socketio import SocketIO
+from flask_cors import CORS, cross_origin
+async_mode = None
 app = Flask(__name__)
-# CORS(app, support_credentials=True)
+socket_ = SocketIO(app, async_mode=async_mode)
+CORS(app, support_credentials=True)
 
-df_1 = pd.read_csv("Sensor Data.csv")
+df_1 = pd.read_csv("Sensor Data.csv", nrows=20)
 df_1 = df_1[df_1['Node ID'] == 1]
 df_1.to_csv('Sensor Data 1.csv')
 
-df_2 = pd.read_csv("Sensor Data.csv")
+df_2 = pd.read_csv("Sensor Data.csv", nrows=20)
 df_2 = df_2[df_2['Node ID'] == 2]
 df_2.to_csv('Sensor Data 2.csv')
 
@@ -83,4 +85,4 @@ def total_traffic():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5100)
+    socket_.run(app, debug=True, port=5100)
