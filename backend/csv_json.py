@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, jsonify, request
 import json
 import csv
 import pandas as pd
@@ -39,8 +39,8 @@ def sensor_data1():
         json.dump(data, f)
     f = open("sensor_data1.json", "r")
     file_contents = f.read()
-    # return (file_contents)
-    return(file_contents.lstrip('[').rstrip(']'))
+    return (file_contents)
+    # return(file_contents.lstrip('[').rstrip(']'))
 
 # Sensor data for node 2
 
@@ -64,8 +64,7 @@ def sensor_data2():
         json.dump(data, f)
     f = open("sensor_data2.json", "r")
     file_contents = f.read()
-    # return (file_contents)
-    return(file_contents.lstrip('[').rstrip(']'))
+    return (file_contents)
 
 
 @app.route('/total_traffic', methods=['GET', 'POST'])
