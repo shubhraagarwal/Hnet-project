@@ -38,6 +38,7 @@ def sensor_data1():
     with open("sensor_data1.json", "w") as f:
         json.dump(data, f)
     f = open("sensor_data1.json", "r")
+    file_contents = f.read()
     # return (file_contents)
     return(file_contents.lstrip('[').rstrip(']'))
 
