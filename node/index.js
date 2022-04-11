@@ -2,7 +2,7 @@ const express = require("express");
 const request = require("request");
 const mongoose = require("mongoose");
 const app = express();
-const API_URL = "http://0fdc-2409-4072-598-a099-fceb-890d-566c-5055.ngrok.io/";
+const API_URL = "0a29-2409-4072-598-a099-fceb-890d-566c-5055.ngrok.io";
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri =
   "mongodb+srv://admin:admin@cluster0.wehxb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
