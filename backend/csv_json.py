@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request, jsonify
+from flask_ngrok import run_with_ngrok
 import json
 import csv
 import pandas as pd
@@ -6,6 +7,8 @@ from flask_socketio import SocketIO
 from flask_cors import CORS, cross_origin
 async_mode = None
 app = Flask(__name__)
+run_with_ngrok(app)
+
 socket_ = SocketIO(app, async_mode=async_mode)
 CORS(app, support_credentials=True)
 
@@ -39,8 +42,7 @@ def sensor_data1():
         json.dump(data, f)
     f = open("sensor_data1.json", "r")
     file_contents = f.read()
-    return (file_contents)
-    # return(file_contents.lstrip('[').rstrip(']'))
+    return(file_contents)
 
 # Sensor data for node 2
 
@@ -86,4 +88,4 @@ def total_traffic():
 
 
 if __name__ == '__main__':
-    socket_.run(app, debug=True, port=5100)
+    app.run()
