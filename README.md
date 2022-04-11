@@ -1,75 +1,98 @@
-# To-DO
+# HNET
 
-- [ ] Python API should call the node API and not the other way around
-- [ ] The Python API should send only the lastest row of the CSV file and not the whole JSON
+A brief description of what this project does and who it's for
 
-# Getting Started with Create React App
+## Python
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```bash
+cd backend
+pip install requirements.txt
+```
 
-## Available Scripts
+## Node
 
-In the project directory, you can run:
+```
+cd node
+npm install
+```
 
-### `npm start`
+## Working with the API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You will need to have ngrok installed and setup in your local environment to get the API
+up and running.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If you do not have ngrok already installed, you can follow the steps given <a href="https://ngrok.com/download"> here </a>
 
-### `npm test`
+After setting up ngrok in your local environment, follow the steps given below
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+cd backend
+python csv_json.py
+```
 
-### `npm run build`
+After running the python script, you will be shown a link which NGROK has generated as a public endpoint for your localhost server.
+Copy the URL and enter the following commands in your terminal.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+cd ..
+cd node
+code index.js
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+These series of commands will open the node file in your text editor.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Paste the link you just copied from the terminal into line number `5` of the `index.js` file.
 
-### `npm run eject`
+After this all you have to do is run `nodemon index.js` in your terminal and Voila! The API is up and running.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Pushing data into the database
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Push Sensor 1 Data into the database from the local python server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```http
+  GET /one
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To update the database with the latest readings from node `1`, hit the given endpoint once and wait for a 200 OK response.
 
-## Learn More
+#### Push Sensor 2 Data into the Database from the local python server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```http
+  GET /two
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To update the database with the latest readings from node `2`, hit the given endpoint once and wait for a 200 OK response.
 
-### Code Splitting
+#### Push Total Traffic Data into the Database from the local python server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```http
+  GET /total_traffic
+```
 
-### Analyzing the Bundle Size
+To update the database with the latest readings of traffic on the nodes, hit the given endpoint once and wait for a 200 OK response.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Getting data from the database
 
-### Making a Progressive Web App
+### Get readings of node 1
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```http
+  GET /getnodeone
+```
 
-### Advanced Configuration
+Returns an array of objects containing all the readings from node `1`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Get readings of node 2
 
-### Deployment
+```http
+  GET /getnodetwo
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Returns an array of objects containing all the readings from node `2`.
 
-### `npm run build` fails to minify
+### Get readings of total traffic
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```http
+  GET /gettotaltraffic
+```
+
+Returns an array of objects containing all the readings about the total traffic on the node.
